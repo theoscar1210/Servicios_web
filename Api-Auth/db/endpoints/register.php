@@ -1,8 +1,27 @@
 <?php
+
+// HABILITAR CORS PARA EL FRONTEND
+header("Access-Control-Allow-Origin: *"); // Puedes reemplazar * por http://127.0.0.1:5500 si prefieres
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
+
+// RESPUESTA ANTES DE ENVIAR EL FETCH, PARA OPCIONES
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+
+
 // endpoints/register.php
 header('Content-Type: application/json');
 
-require_once '../db/conexion.php';
+require_once '../conexion.php';
+
+// Habilita CORS
+
+
 
 // Obtener datos del POST
 $data = json_decode(file_get_contents("php://input"), true);

@@ -4,21 +4,27 @@ document
     e.preventDefault();
 
     const usuario = document.getElementById("usuario").value;
-    const contrasena = document.getElementById("contrasena").value;
+    const password = document.getElementById("password").value;
 
-    fetch("http://localhost/api_rest_php/endpoints/register.php", {
+    console.log("Usuario:", usuario); // Solo para verificar en consola
+    console.log("Contraseña:", password);
+
+    fetch("http://localhost/Servicios_web/Api-Auth/db/endpoints/register.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ usuario, contrasena }),
+      body: JSON.stringify({
+        usuario: usuario,
+        password: password,
+      }),
     })
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => {
-        alert(data.message);
+        console.log(data);
+        alert(data.mensaje); // Opcional, para mostrar el mensaje
       })
       .catch((error) => {
         console.error("Error:", error);
-        alert("Error en el registro");
       });
   });

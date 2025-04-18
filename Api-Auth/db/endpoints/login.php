@@ -1,8 +1,36 @@
 <?php
-// endpoints/login.php
-header('Content-Type: application/json');
 
-require_once '../db/conexion.php';
+// HABILITAR CORS PARA EL FRONTEND
+header("Access-Control-Allow-Origin: *"); // Puedes reemplazar * por http://127.0.0.1:5500 si prefieres
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Content-Type: application/json");
+
+// RESPUESTA ANTES DE ENVIAR EL FETCH, PARA OPCIONES
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+
+
+
+
+
+
+// endpoints/login.php
+
+
+require_once '../conexion.php';
+
+
+
+// Para responder a preflight (OPTIONS)
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
 
 $data = json_decode(file_get_contents("php://input"), true);
 $usuario = $data['usuario'] ?? '';
